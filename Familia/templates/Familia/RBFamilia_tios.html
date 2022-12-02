@@ -1,0 +1,20 @@
+{% extends 'Familia/padre.html' %}
+
+{% load static %}
+
+{% block titulo %}
+  <h1 class="text-white font-tertiary">Esta es la página<br>del Resultado de la<br>Búsqueda de los Tios</h1>
+{% endblock %} 
+
+{% block contenido %}
+<ul>
+  {% for nombretio in tios %}
+    <li>{{Tios.nombre}}</li>
+    <li>{{Tios.apellido}}</li>
+    <li>{{Tios.proveniente}}</li>
+    <li>{{Tios.edad}}</li>
+    <li>{{Tios.nacimiento}}</li>
+    <br>
+  {% endfor %}
+</ul>
+{% endblock %} 
