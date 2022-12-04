@@ -89,38 +89,120 @@ def Familia_hermanos(request):
 
 
 def Familia_primos(request):
-    return render(request, 'Familia/Familia_primos.html')
+    if request.method=="POST":
+        form=FormPrimos(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            nombrep=info["nombre"]
+            apellidop=info["apellido"]
+            edadp=info["edad"]
+            nacimientop=info["nacimiento"]
+
+            primosp=Hermanos(nombre=nombrep,apellido=apellidop,edad=edadp,nacimiento=nacimientop)
+            primosp.save()
+            return render(request, 'Familia/inicio.html', {"mensaje": "Registro Creado Correctamente!!!"})
+    else:
+        form=FormHermanos()
+
+    return render(request, 'Familia/Familia_primos.html', {"form":form})
 
 def Familia_lugar(request):
-    return render(request, 'Familia/Familia_lugar.html')
+    if request.method=="POST":
+        form=FormViven(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            ciudadv=info["ciudad"]
+            estadov=info["estado"]
+            
+            lugarv=Viven(ciudad=ciudadv,estado=estadov)
+            lugarv.save()
+            return render(request, 'Familia/inicio.html', {"mensaje": "Registro Creado Correctamente!!!"})
+    else:
+        form=FormViven()
+
+    return render(request, 'Familia/Familia_lugar.html', {"form":form})
+
 
 def Familia_trabajan(request):
-    return render(request, 'Familia/Familia_trabajan.html')
+    if request.method=="POST":
+        form=FormTrabajan(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            profesiont=info["profesion"]
+            titulot=info["titulo"]
+            mailt=info["mail"]
+            activot=info["activo"]
+            
+            trabajant=Trabajo(profesion=profesiont,titulo=titulot,mail=mailt,activo=activot)
+            trabajant.save()
+            return render(request, 'Familia/inicio.html', {"mensaje": "Registro Creado Correctamente!!!"})
+    else:
+        form=FormTrabajan()
+
+    return render(request, 'Familia/Familia_trabajan.html', {"form":form})
+
+#Terminan las páginas para agregar
+
+#Inician las páginas de búsquedas
 
 def BFamilia_tios(request):
-    return render(request, 'Familia/BFamilia_Tios.html')
+    return render(request, 'Familia/BFamilia_tios.html')
+
+def BFamilia_hermanos(request):
+    return render(request, 'Familia/BFamilia_hermanos.html')
+
+def BFamilia_primos(request):
+    return render(request, 'Familia/BFamilia_primos.html')
+
+def BFamilia_lugar(request):
+    return render(request, 'Familia/BFamilia_lugar.html')
+
+def BFamilia_trabajan(request):
+    return render(request, 'Familia/BFamilia_trabajan.html')
+
+#Termina el segmento de las páginas de búsquedas
+
+#Inicia el segmento de las páginas con resultados de las búsquedas
 
 def Btios(request):
     if request.GET["nombre"]:
-        bnombretio=request.get["nombre"]
+        nombre=request.GET["nombre"]
         #Tios=Tios.objects.all()
-        #Tios=Tios.objects.get(nombre=bnombretio)
-        NTios=Tios.objects.filter(nombre=bnombretio)
-        return render(request,'Familia/RBFamilia_tios.html',{"nombre":NTios})
+        #Tios=Tios.objects.get(nombre=nombre)
+        nombres=Tios.objects.filter(nombre=nombre)
+        return render(request,"Familia/RBFamilia_tios.html",{"nombre":nombres})
     else:
-        return render(request, 'Familia/BFamilia_tios', {"mensaje":"Favor de Ingresar un Nombre Correcto!"})
+        return render(request,"Familia/BFamilia_tios", {"mensaje":"Favor de Ingresar un Nombre Correcto!"})
 
-"""def Formulario(request):
-    if request.method=="POST":
-        nombret=request.POST["nombre"]
-        apellidot=request.POST["apellido"]
-        provenientet=request.POST["proveniente"]
-        edadt=request.POST["edad"]
-        nacimientot=request.POST["nacimiento"]
+def Bhermanos(request):
+    if request.GET["nombre"]:
+        nombre=request.GET["nombre"]
+        nombres=Hermanos.objects.filter(nombre=nombre)
+        return render(request,"Familia/RBFamilia_hermanos.html",{"nombre":nombres})
+    else:
+        return render(request,"Familia/BFamilia_hermanos", {"mensaje":"Favor de Ingresar un Nombre Correcto!"})
 
-        tiost=Tios(nombre=nombret,apellido=apellidot,proveniente=provenientet,edad=edadt,nacimiento=nacimientot)
-        tiost.save()
-        return render(request, 'Familia/inicio.html')
+def Bprimos(request):
+    if request.GET["nombre"]:
+        nombre=request.GET["nombre"]
+        nombres=Primos.objects.filter(nombre=nombre)
+        return render(request,"Familia/RBFamilia_primos.html",{"nombre":nombres})
+    else:
+        return render(request,"Familia/BFamilia_primos", {"mensaje":"Favor de Ingresar un Nombre Correcto!"})
 
-    return render(request, 'Familia/formulario.html')"""
+def Blugar(request):
+    if request.GET["nombre"]:
+        nombre=request.GET["nombre"]
+        nombres=Viven.objects.filter(ciudad=nombre)
+        return render(request,"Familia/RBFamilia_lugar.html",{"nombre":nombres})
+    else:
+        return render(request,"Familia/BFamilia_lugar", {"mensaje":"Favor de Ingresar un Nombre Correcto!"})
 
+def Btrabajan(request):
+    if request.GET["nombre"]:
+        nombre=request.GET["nombre"]
+        nombres=Trabajo.objects.filter(profesion=nombre)
+        return render(request,"Familia/RBFamilia_trabajan.html",{"nombre":nombres})
+    else:
+        return render(request,"Familia/BFamilia_trabajan", {"mensaje":"Favor de Ingresar un Nombre Correcto!"})
+#Termina el segmento de las páginas con resultados de las páginas

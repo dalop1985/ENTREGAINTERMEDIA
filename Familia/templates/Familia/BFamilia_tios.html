@@ -8,8 +8,11 @@
 
 {% block contenido %}
 <p class="font-secondary paragraph-lg text-dark">Lista de Información de los Tios</p>
+
 <form action="{% url 'Btios' %}" method="GET"> 
+
   <input type="text" name="nombre" id="nombre">
+  
   <input type="submit" value="Buscar"> 
 
 </form>

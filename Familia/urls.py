@@ -15,4 +15,12 @@ urlpatterns = [
     path('Familia_trabajan/',Familia_trabajan, name="Trabajan"),
     path('BFamilia_tios/',BFamilia_tios, name="BFamilia_tios" ),
     path('Btios/',Btios, name="Btios"),
+    path('BFamilia_hermanos/',BFamilia_hermanos, name="BFamilia_hermanos" ),
+    path('BFamilia_primos/',BFamilia_primos, name="BFamilia_primos" ),
+    path('BFamilia_lugar/',BFamilia_lugar, name="BFamilia_lugar" ),
+    path('BFamilia_trabajan/',BFamilia_trabajan, name="BFamilia_trabajan" ),
+    path('Bhermanos/',Bhermanos, name="Bhermanos"),
+    path('Bprimos/',Bprimos, name="Bprimos"),
+    path('Blugar/',Blugar, name="Blugar"),
+    path('Btrabajan/',Btrabajan, name="Btrabajan"),
 ]

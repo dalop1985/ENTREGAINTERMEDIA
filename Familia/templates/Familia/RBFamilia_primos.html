@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block titulo %}
-  <h1 class="text-white font-tertiary">Esta es la página<br>del Resultado de la<br>Búsqueda de los Tios</h1>
+  <h1 class="text-white font-tertiary">Esta es la página<br>del Resultado de la<br>Búsqueda de los Primos</h1>
 {% endblock %} 
 
 {% block contenido %}
@@ -12,17 +12,15 @@
     <tr>
       <th>Nombre </th>
       <th>Apellido </tthd>
-      <th>Proviene de </th>
       <th>Edad </th>
       <th>Fecha Nacimiento </th>
     </tr>
-  {% for Tios in nombre %}
+  {% for Primos in nombre %}
     <tr>
-      <td>{{Tios.nombre}}</td>
-      <td>{{Tios.apellido}}</td>
-      <td>{{Tios.proveniente}}</td>
-      <td>{{Tios.edad}}</td>
-      <td>{{Tios.nacimiento}}</td>
+      <td>{{Primos.nombre}}</td>
+      <td>{{Primos.apellido}}</td>
+      <td>{{Primos.edad}}</td>
+      <td>{{Primos.nacimiento}}</td>
     </tr>
   {% endfor %}
 </table>

@@ -8,4 +8,10 @@
 
 {% block contenido %}
 <p class="font-secondary paragraph-lg text-dark">Este es el contenido de la página de los Primos</p>
+<form action="{% url 'Primos' %}" method="POST"> {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+    <input type="submit" value="Enviar"> 
+  </form>
 {% endblock %} 
